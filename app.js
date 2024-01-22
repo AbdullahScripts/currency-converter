@@ -12,6 +12,10 @@ let imgTo = document.querySelector(".to img"); // to class image get
 let getButton=document.getElementById("getRate"); // button of find exchange rate
 
 
+
+let show = document.querySelector(".msg"); // get class message to show data
+
+
 //////////////////////---Setting Values of dropdwon---/////////////////
 
 for (select of dropdowns) {
@@ -69,37 +73,20 @@ getButton.addEventListener("click", async function(e) {
 async function findExchange(e) {
   e.preventDefault();
 
+  let inputvalue= document.getElementById("invalue").value; // input field data
+
   let countryFrom = fromDrop.value.toLowerCase();
   let countryTo = toDrop.value.toLowerCase();
 
-  console.log(countryFrom)
-  console.log(countryTo)
+  // console.log(countryFrom)
+  // console.log(countryTo)
 
   const BASE_URL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${countryFrom}/${countryTo}.json`;
-  // const BASE_URL = `https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies/${countryFrom.toLowerCase()}/${countryTo.toUpperCase()}.json`;
-
+  
   const response = await fetch(BASE_URL);
     const data = await response.json();
 
-    console.log(data);
+    show.innerText=`${inputvalue} ${countryFrom} = ${inputvalue * data[countryTo]} ${countryTo}`
 
   
-  // Rest of your code here
 }
-
-// // Return value of API
-
-// async function valAPI(api) {
-//   try {
-//     const response = await fetch(api);
-//     const data = await response.json();
-
-//     console.log(data);
-//     // Perform actions with the data
-
-//     return data; // You may want to return the data for further use
-//   } catch (error) {
-//     console.error("Error fetching data:", error);
-//     throw error; // Rethrow the error to handle it in the calling function if needed
-//   }
-// }
